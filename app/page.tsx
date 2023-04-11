@@ -1,13 +1,17 @@
-import { getCurrentUser } from '@/app/actions/getCurrentUser';
-import getListings from '@/app/actions/getListings';
-import ClientOnly from '@/app/components/ClientOnly';
-import Container from '@/app/components/Container';
-import EmptyState from '@/app/components/EmptyState';
-import ListingCard from '@/app/components/listings/ListingCard';
-import { SafeListing } from '@/app/types';
+import { getCurrentUser } from "@/app/actions/getCurrentUser";
+import getListings, { IListingParams } from "@/app/actions/getListings";
+import ClientOnly from "@/app/components/ClientOnly";
+import Container from "@/app/components/Container";
+import EmptyState from "@/app/components/EmptyState";
+import ListingCard from "@/app/components/listings/ListingCard";
+import { SafeListing } from "@/app/types";
 
-async function Home() {
-  const listings = await getListings();
+type HomeProps = {
+  searchParams: IListingParams;
+};
+
+async function Home({ searchParams }: HomeProps) {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {

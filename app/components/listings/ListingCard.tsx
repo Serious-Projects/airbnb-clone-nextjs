@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import Button from '@/app/components/Button';
-import HeartButton from '@/app/components/HeartButton';
-import useCountries from '@/app/hooks/useCountries';
-import { SafeListing, SafeUser } from '@/app/types';
-import { Reservation } from '@prisma/client';
-import { format } from 'date-fns';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React, { useCallback, useMemo } from 'react';
+import Button from "@/app/components/Button";
+import HeartButton from "@/app/components/HeartButton";
+import useCountries from "@/app/hooks/useCountries";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
+import { format } from "date-fns";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useMemo } from "react";
 
 type ListingCardProps = {
   data: SafeListing;
-  reservation?: Reservation;
+  reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
@@ -25,7 +24,7 @@ function ListingCard({
   reservation,
   onAction,
   disabled,
-  actionId = '',
+  actionId = "",
   actionLabel,
   currentUser,
 }: ListingCardProps) {
@@ -53,7 +52,7 @@ function ListingCard({
     if (!reservation) return null;
     const start = new Date(reservation.startDate);
     const end = new Date(reservation.endDate);
-    return `${format(start, 'PP')} - ${format(end, 'PP')}`;
+    return `${format(start, "PP")} - ${format(end, "PP")}`;
   }, [reservation]);
 
   return (
