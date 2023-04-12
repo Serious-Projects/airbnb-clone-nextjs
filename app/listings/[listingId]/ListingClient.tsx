@@ -17,7 +17,7 @@ import { toast } from "react-hot-toast";
 type ListingClientProps = {
   listing: SafeListing & { user: SafeUser };
   currentUser?: SafeUser | null;
-  reservations?: SafeReservation[];
+  reservations?: any[];
 };
 
 const initialDateRange = {
@@ -26,7 +26,11 @@ const initialDateRange = {
   key: "selection",
 };
 
-function ListingClient({ listing, currentUser, reservations = [] }: ListingClientProps) {
+function ListingClient({
+  listing,
+  currentUser,
+  reservations = [] as SafeReservation[],
+}: ListingClientProps) {
   const loginModel = useLoginModal();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -98,7 +102,7 @@ function ListingClient({ listing, currentUser, reservations = [] }: ListingClien
             locationValue={listing.locationValue}
             currentUser={currentUser}
           />
-          <div className="grid grid-cols-2 md:grid-cols-7 md:gap-10 mt-6">
+          <div className="grid grid-cols-2 mt-6 md:grid-cols-7 md:gap-10">
             <ListingInfo
               user={listing.user}
               category={category}

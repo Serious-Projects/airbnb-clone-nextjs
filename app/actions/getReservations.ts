@@ -36,6 +36,7 @@ async function getReservations({ listingId, userId, authorId }: IParams) {
       listing: {
         ...reservation.listing,
         createdAt: reservation.listing?.createdAt.toISOString(),
+        updatedAt: reservation.listing?.updatedAt.toISOString(),
       },
     }));
 
